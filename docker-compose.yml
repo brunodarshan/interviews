@@ -3,7 +3,7 @@ services:
     cashback_app:
         build: .
         container_name: cashback_app
-        command: bundle exec rails s
+        command: bundle exec rails s -b 0.0.0.0
         volumes:
             - ./:/app/
         ports:

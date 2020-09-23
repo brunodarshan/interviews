@@ -8,7 +8,9 @@ module Admin
       @offers = Offer.all.order(starts_at: :asc)
     end
 
-    def new; end
+    def new
+      @offer = Offer.new
+    end
 
     def create
       service = Offer::CreateOfferService.new(offer_params).call

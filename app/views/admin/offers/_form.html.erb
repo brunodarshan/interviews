@@ -1,0 +1,33 @@
+
+<%= form_with model: offer, url: url, method: method do |f| %>
+  <div class="form-group">
+    <%= f.label 'Advertiser*' %>
+    <%= f.text_field :advertiser_name, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label 'URL*' %>
+    <%= f.text_field :url, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label 'Description*' %>
+    <%= f.text_area :description, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <div class="row">
+        <div class="col">
+            <%= f.label 'Starts At*' %>
+            <%= f.datetime_field :starts_at, class: 'form-control' %>
+        </div>
+        <div class="col">
+            <%= f.label 'Ends At' %>
+            <%= f.datetime_field :ends_at, class: 'form-control' %>
+        </div>
+    </div>
+  </div>
+  <div class="form-group form-check">
+    <%= f.check_box :premmium, class: 'form-check-input' %>
+    <%= f.label 'Premium', class: 'form-check-label' %>
+  </div>
+  <%= hidden_field_tag(:query, query) if defined? query %>
+  <%= f.submit  class: 'btn btn-primary' %>
+<% end %>

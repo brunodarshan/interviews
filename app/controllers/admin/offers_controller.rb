@@ -4,7 +4,9 @@ module Admin
   # Offers management
   class OffersController < ApplicationController
     before_action :set_offer, only: %i[edit update destroy]
-    def index; end
+    def index
+      @offers = Offer.all.order(starts_at: :asc)
+    end
 
     def new; end
 

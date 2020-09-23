@@ -1,0 +1,24 @@
+
+<h1>Index of Offers</h1>
+<div class="row">
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Advertiser<th>
+                <th>url</th>
+                <th>state</th>
+                <th>premmium</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @offers.each do |offer| %>
+            <tr>
+                <td scope="row"><%= offer.advertiser_name %></td>
+                <td ><%= offer.url %></th>
+                <td ><%= offer.state %></th>
+                <td ><%= offer.premmium %></th>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+</div>

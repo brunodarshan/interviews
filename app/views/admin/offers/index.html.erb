@@ -4,19 +4,26 @@
     <table class="table">
         <thead class="thead-light">
             <tr>
-                <th scope="col">Advertiser<th>
+                <th scope="col">ID</th>
+                <th scope="col">Advertiser</th>
                 <th>url</th>
                 <th>state</th>
                 <th>premmium</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         <% @offers.each do |offer| %>
             <tr>
+                <td scope="row"><%= offer.id %></td>
                 <td scope="row"><%= offer.advertiser_name %></td>
-                <td ><%= offer.url %></th>
-                <td ><%= offer.state %></th>
-                <td ><%= offer.premmium %></th>
+                <td ><%= offer.url %></td>
+                <td ><%= offer.state %></td>
+                <td ><%= '&#x2714'.html_safe if offer.premmium  %></td>
+                <td >
+                    <%= link_to 'edit', edit_admin_offer_url(offer), class: 'btn btn-light text-secondary' %>
+                    <%= link_to 'destroy', admin_offer_url(offer), method: :delete, class: 'btn btn-light text-danger' %>
+                </td>
             </tr>
         <% end %>
         </tbody>

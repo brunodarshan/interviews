@@ -15,7 +15,7 @@ class Offer
       attributes = {}
       case state
       when :enabled
-        if current_time >= @offer.starts_at && current_time <= @offer.ends_at
+        if @offer.ends_at.blank? || current_time >= @offer.starts_at && current_time <= @offer.ends_at
           @success = true; attributes = { state: :enabled }
         end
         # ensure rule 3 - when current time ≤ ends at, state = disabled
@@ -32,7 +32,7 @@ class Offer
         attributes = { state: :disabled, ends_at: (if @offer.ends_at.blank?
                                                       current_time
                                                     end) }.compact
-        @success = true                                                      
+        @success = true
       end
       @success ? update_service(attributes) : self
     end
@@ -40,9 +40,7 @@ class Offer
     private
 
     def update_service(attributes)
-      service = Offer::UpdateOfferService.new(@offer, attributes).call
-      @offer = service.result
-      @success = service.success?
+      Offer::UpdateOfferService.new(@offer, attributes).call
     end
   end
 end

@@ -40,20 +40,74 @@ RSpec.describe Admin::OffersController, type: :controller do
     end
   end
 
+  # To UPDATE and DELETE actions test
+  let(:offer) {
+    Offer::CreateOfferService.new({ advertiser_name: 'Foo Bar Co.',
+      starts_at: 2.days.ago,
+      url: 'https://test.com',
+      description: 'lorem ipsum dolor' }).call.result
+  }
+
   describe 'PUT/PATCH update' do
-    before do
-      patch :update, params: {
-        id: 1
-      }
+    describe 'update offer action' do
+      context 'update failure' do
+        before do
+          patch :update, params: {
+            id: offer.id, offer: {
+              advertiser_name: ''
+            }, query: 'update'
+          }
+        end
+    
+        it { expect(response).to render_template(:edit) }
+      end
+
+      context 'update success' do
+        before do
+          patch :update, params: {
+            id: offer.id, offer: {
+              advertiser_name: 'Luthor Coorporation'
+            }, query: 'update'
+          }
+        end
+    
+        it { expect(response).to redirect_to('/admin/offers') }
+      end
     end
 
-    it { expect(response).to have_http_status(:no_content) }
+    describe 'toggle_state action' do
+      context 'failure' do
+      let(:offer) { Offer::CreateOfferService.new(advertiser_name: 'Foo Ltda.', url: 'http://foo.com/buy_it', description: 'lorem ipsum dolor sit amet. lorem ipsum dolor sit amet.', starts_at: 2.days.from_now, ends_at: 10.days.from_now).call.result }
+
+        before do
+          patch :update, params: {
+            id: offer.id, offer: {
+              state: 'enable'
+            }, query: 'toggle_state'
+          }
+        end
+
+        it { expect(response).to render_template(:edit) }
+      end
+
+      context 'success' do 
+        before do
+          patch :update, params: {
+            id: offer.id, offer: {
+              state: 'enabled'
+            }, query: 'toggle_state'
+          }
+        end
+
+        it { expect(response).to redirect_to('/admin/offers') }
+      end
+    end
   end
 
-  describe 'PUT/PATCH update' do
+  describe 'DELETE destroy' do
     before do
       delete :destroy, params: {
-        id: 1
+        id: offer.id
       }
     end
 

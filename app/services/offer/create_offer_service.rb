@@ -12,7 +12,6 @@ class Offer
     end
 
     def call
-      @offer.enable = false # 1th enability rule
       @success = @offer.save
       self
     end

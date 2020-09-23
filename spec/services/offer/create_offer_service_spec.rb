@@ -36,7 +36,7 @@ RSpec.describe Offer::CreateOfferService do
       describe '#result is a offer created' do
         it { expect(use_case.result).to have_attributes(
           id: be_a_kind_of(Integer), 
-          enable: be(false)) }
+          state: 'disabled') }
       end
 
     end

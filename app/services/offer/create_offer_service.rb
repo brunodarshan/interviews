@@ -5,7 +5,6 @@ class Offer
     attr_reader :offer
     delegate :errors, :valid?, to: :offer
     alias result offer
-    alias success? success
 
     def initialize(attributes)
       @attributes = attributes

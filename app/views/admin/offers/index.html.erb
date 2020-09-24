@@ -21,8 +21,13 @@
                 <td ><%= offer.state %></td>
                 <td ><%= '&#x2714'.html_safe if offer.premmium  %></td>
                 <td >
-                    <%= link_to 'edit', edit_admin_offer_url(offer), class: 'btn btn-light text-secondary' %>
-                    <%= link_to 'destroy', admin_offer_url(offer), method: :delete, class: 'btn btn-light text-danger' %>
+                    <%= link_to 'edit', edit_admin_offer_url(offer), class: 'btn btn-light btn-sm  text-secondary' %>
+                    <%= link_to 'destroy', admin_offer_url(offer), method: :delete, class: 'btn btn-light btn-sm  text-danger' %>
+                    <%= form_tag admin_offer_path(offer), method: :put do %>
+                      <%= hidden_field_tag('offer[state]', offer.state.eql?('enabled') ? 'disabled' : 'enabled') %>
+                      <%= hidden_field_tag(:query, 'toggle_state') %>
+                      <%= submit_tag( offer.state.eql?('enabled') ? 'disable' : 'enable', class: 'btn btn-light btn-sm text-secondary' )%>
+                    <% end %>
                 </td>
             </tr>
         <% end %>

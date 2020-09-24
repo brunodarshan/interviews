@@ -34,7 +34,9 @@ module Admin
       render :edit
     end
 
-    def destroy; end
+    def destroy
+      @offer.destroy
+    end
 
     private
 

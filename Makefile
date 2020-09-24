@@ -1,4 +1,4 @@
-build: docker-build create migrate yarn
+install: build create migrate yarn
 migrate:
 	@docker-compose run --rm cashback_app bundle exec rails db:migrate
 create:
@@ -15,5 +15,5 @@ foo:
 	@echo "bar"
 ops: 
 	@echo "ops"
-docker-build:
+build:
 	@docker-compose build

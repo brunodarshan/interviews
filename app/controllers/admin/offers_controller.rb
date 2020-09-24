@@ -15,12 +15,9 @@ module Admin
     def create
       service = Offer::CreateOfferService.new(offer_params).call
 
-      if service.success?
-        return redirect_to admin_offers_url
-      else
-        @offer = service.result
-      end
+      return redirect_to admin_offers_url if service.success?
 
+      @offer = service.result
       render :new
     end
 
@@ -30,11 +27,10 @@ module Admin
                   Offer::UpdateOfferService.new(@offer, offer_params.to_h).call
                 when 'toggle_state'
                   Offer::EnabilityResolutionService.new(@offer).call(offer_params[:state].to_sym)
-                end            
+                end
       return redirect_to admin_offers_url if service.success?
 
       @offer = service.result
-
       render :edit
     end
 

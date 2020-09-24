@@ -1,5 +1,7 @@
 # Offers
 
+Access the app at https://limitless-woodland-16487.herokuapp.com/
+
 ## Get Start
 
 1 - Rename and modify the current var on `.env-example` file with your local of docker setup configs

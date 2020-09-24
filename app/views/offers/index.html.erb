@@ -1,1 +1,22 @@
-<h1>Offers</h1>
+<div class="pb-4 pt-4">
+    <h1>Offers</h1>
+</div>
+<div class="row">
+<% unless @offers.any? %>
+    <p>There isn't offers to you now... :(</p>
+<% else %>
+    <% @offers.each do |offer| %>
+        <div class="col-md-3 mb-2">
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                    <h5 class="card-title mb-4"><%= offer.advertiser_name %></h5>
+                    <small>from <%= offer.starts_at.strftime("%d/%m/%Y") %> to <%= offer.ends_at.strftime("%d/%m/%Y") %></small>
+                    <p class="card-text text-secondary"><%= offer.description[0..10]%>...</p>
+                    <a href="#" class="card-link">See more</a>
+                    <a href="#" class="card-link btn btn-md btn-primary">Go to Offer</a>
+                </div>
+            </div>
+        </div>
+    <% end %>
+<% end %>
+</div>

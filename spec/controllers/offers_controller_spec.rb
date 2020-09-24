@@ -13,8 +13,18 @@ RSpec.describe OffersController, type: :controller do
   end
 
   describe '#index GET' do
+    let!(:offer) do 
+      Offer.create(
+        advertiser_name: 'Foo Bar Corp.',
+        url: 'https://google.com',
+        description: 'lorem ipsum dolor',
+        starts_at: 2.days.ago,
+        ends_at: 2.days.from_now,
+      )
+    end
     before do
-      get :show, params: { id: 1 }
+      offer.enabled!
+      get :show, params: { id: offer.id }
     end
 
     it { expect(response).to have_http_status(:ok) }

@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :offers
+
+    root to: 'offers#index'
   end
 
   resources :offers, path: '/', only: %i[index show]
